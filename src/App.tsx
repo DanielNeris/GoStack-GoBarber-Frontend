@@ -7,8 +7,8 @@ import GlobalStyle from './styles/global';
 
 const App: React.FC = () => (
   <>
-    {/* <SingIn /> */}
-    <SignUp />
+    <SingIn />
+    {/* <SignUp /> */}
 
     <GlobalStyle />
   </>
