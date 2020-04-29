@@ -12,6 +12,7 @@ import { useToast, ToastMessages } from '../../../hooks/toast';
 
 interface ToastProps {
   message: ToastMessages;
+  style: object;
 }
 
 const icons = {
@@ -20,12 +21,15 @@ const icons = {
   error: <FiCheckCircle size={24} />,
 };
 
-const Toast: React.FC<ToastProps> = ({ message }) => {
+const Toast: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
 
-  const handleRemoveToast = useCallback((id: string) => {
-    removeToast(id);
-  }, []);
+  const handleRemoveToast = useCallback(
+    (id: string) => {
+      removeToast(id);
+    },
+    [removeToast],
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,6 +46,7 @@ const Toast: React.FC<ToastProps> = ({ message }) => {
       key={message.id}
       type={message.type}
       hasDescription={!!message.description}
+      style={style}
     >
       {icons[message.type || 'info']}
 
