@@ -12,9 +12,9 @@ import { Container, Content, Background } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
-interface SingInFormData {
+interface SignInFormData {
   email: string;
   password: string;
 }
@@ -22,10 +22,10 @@ interface SingInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { singIn } = useAuth();
+  const { signIn } = useAuth();
 
   const handleSubmit = useCallback(
-    async (data: SingInFormData) => {
+    async (data: SignInFormData) => {
       try {
         formRef.current?.setErrors({});
 
@@ -38,13 +38,13 @@ const SignIn: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        singIn({ email: data.email, password: data.password });
+        signIn({ email: data.email, password: data.password });
       } catch (error) {
         const errors = getValidationErrors(error);
         formRef.current?.setErrors(errors);
       }
     },
-    [singIn],
+    [signIn],
   );
 
   return (
